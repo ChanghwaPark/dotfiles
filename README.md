@@ -8,7 +8,7 @@
 
 ## Neovim setup
 
-Requires [NvChad](https://github.com/NvChad/NvChad) 
+Requires [NvChad](https://github.com/NvChad/NvChad)
 
 1. Install Neovim and NvChad.
 2. Place nvim folder to '~/.config/nvim/lua/custom'
@@ -25,6 +25,4 @@ Requires [gpakosz/.tmux](https://github.com/gpakosz/.tmux)
 Requires [Oh My Zsh](https://github.com/ohmyzsh/ohmyzsh)
 
 1. Install zsh and [Oh My Zsh](https://github.com/ohmyzsh/ohmyzsh).
-2. Replace '~/.zshrc' wich the file in zsh folder.
-
-
+2. Edit '~/.zshrc' with referencing the file in zsh folder.
