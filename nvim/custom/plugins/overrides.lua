@@ -33,6 +33,10 @@ M.treesitter = {
 		"python",
 		"rust",
 	},
+	indent = {
+		enable = true,
+		disable = { "python" },
+	},
 }
 
 M.mason = {
