@@ -1,16 +1,20 @@
--- First read our docs (completely) then check the example_config repo
-
+---@type ChadrcConfig
 local M = {}
 
+-- Path to overriding theme and highlights files
+local highlights = require("custom.highlights")
+
 M.ui = {
-  theme_toggle = { "nightfox", "monekai" },
-  theme = "nightfox",
-  transparency = true,
+	theme_toggle = { "nightfox", "monekai" },
+	theme = "nightfox",
+	hl_override = highlights.override,
+	hl_add = highlights.add,
+	transparency = true,
 }
 
-M.plugins = require "custom.plugins"
+M.plugins = require("custom.plugins")
 
 -- check core.mappings for table structure
-M.mappings = require "custom.mappings"
+M.mappings = require("custom.mappings")
 
 return M
