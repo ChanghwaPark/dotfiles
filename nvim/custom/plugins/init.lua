@@ -39,11 +39,11 @@ local plugins = {
 	},
 
 	-- install without yarn or npm
-	-- ["iamcco/markdown-preview.nvim"] = {
-	--   run = function()
-	--     vim.fn["mkdp#util#install"]()
-	--   end,
-	-- },
+	["iamcco/markdown-preview.nvim"] = {
+		run = function()
+			vim.fn["mkdp#util#install"]()
+		end,
+	},
 
 	-- Install a plugin
 	-- ["tzachar/cmp-tabnine"] = {
