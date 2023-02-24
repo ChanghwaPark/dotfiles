@@ -13,6 +13,8 @@ M.disabled = {
 M.general = {
 	n = {
 		[";"] = { ":", "enter command line", opts = { nowait = true } },
+		["<C-u>"] = { "<C-u>zz", "scroll upwards and center the cursor", opts = { nowait = true } },
+		["<C-d>"] = { "<C-d>zz", "scroll downwards and center the cursor", opts = { nowait = true } },
 	},
 	i = {
 		["jk"] = { "<ESC>", "escape insert mode", opts = { nowait = true } },
