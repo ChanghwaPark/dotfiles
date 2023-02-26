@@ -1,13 +1,14 @@
-local present, cmp = pcall(require, "cmp")
+local present, tabnine = pcall(require, "tabnine")
 
 if not present then
-  return
+	return
 end
 
-local sources = {
-  { name = "cmp_tabnine" },
-}
-
-cmp.setup {
-  sources = sources,
-}
+tabnine.setup({
+	disable_auto_comment = true,
+	accept_keymap = "<Tab>",
+	dismiss_keymap = "<C-]>",
+	debounce_ms = 800,
+	suggestion_color = { gui = "#808080", cterm = 244 },
+	exclude_filetypes = { "TelescopePrompt" },
+})

@@ -38,23 +38,25 @@ local plugins = {
 		override_options = overrides.nvimtree,
 	},
 
-	-- install without yarn or npm
+	-- Install without yarn or npm
 	["iamcco/markdown-preview.nvim"] = {
 		run = function()
 			vim.fn["mkdp#util#install"]()
 		end,
 	},
 
+	-- csv plugin
 	["chrisbra/csv.vim"] = { ft = "csv" },
 
+	-- Tabnine AI assistant
+	["codota/tabnine-nvim"] = {
+		run = "./dl_binaries.sh",
+		config = function()
+			require("custom.plugins.tabnine")
+		end,
+	},
+
 	-- Install a plugin
-	-- ["tzachar/cmp-tabnine"] = {
-	--   after = "nvim-cmp",
-	--   run = "./install.sh",
-	--   config = function()
-	--     require "custom.plugins.tabnine"
-	--   end,
-	-- },
 	-- ["ckipp01/stylua-nvim"] = {
 	--   config = function()
 	--     require("better_escape").setup()
