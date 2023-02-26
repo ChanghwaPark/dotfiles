@@ -20,3 +20,4 @@ end
 
 -- vim.g["python3_host_prog"] = "/usr/bin/python3"
 -- vim.g["python3_host_prog"] = "/home/prosper/anaconda3/bin/python3"
+-- vim.g["python3_host_prog"] = "/home/prosper/anaconda3/envs/patchcore/bin/python3"

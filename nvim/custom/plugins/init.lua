@@ -45,6 +45,8 @@ local plugins = {
 		end,
 	},
 
+	["chrisbra/csv.vim"] = { ft = "csv" },
+
 	-- Install a plugin
 	-- ["tzachar/cmp-tabnine"] = {
 	--   after = "nvim-cmp",
