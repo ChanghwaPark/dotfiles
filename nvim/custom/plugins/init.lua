@@ -56,6 +56,9 @@ local plugins = {
 		end,
 	},
 
+	-- Git
+	["tpope/vim-fugitive"] = {},
+
 	-- Install a plugin
 	-- ["ckipp01/stylua-nvim"] = {
 	--   config = function()
