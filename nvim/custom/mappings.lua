@@ -1,4 +1,4 @@
----@type MappingsConfig
+---@type MappingsTable
 local M = {}
 
 M.disabled = {
@@ -7,7 +7,6 @@ M.disabled = {
 		["<C-l>"] = "",
 		["<C-j>"] = "",
 		["<C-k>"] = "",
-		["d]"] = "",
 	},
 }
 
@@ -39,20 +38,12 @@ M.general = {
 		["sj"] = { "<C-w>j", "move down" },
 		["sk"] = { "<C-w>k", "move up" },
 		["sl"] = { "<C-w>l", "move right" },
-	},
 
-	i = {
-		["jk"] = { "<ESC>", "escape insert mode", opts = { nowait = true } },
-	},
-}
-
-M.lspconfig = {
-	n = {
-		["]d"] = {
+		["<leader>tt"] = {
 			function()
-				vim.diagnostic.goto_next()
+				require("base46").toggle_transparency()
 			end,
-			"goto_next",
+			"toggle transparency",
 		},
 	},
 }

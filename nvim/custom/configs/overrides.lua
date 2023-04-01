@@ -1,41 +1,23 @@
 local M = {}
 
-M.ui = {
-	statusline = {
-		separator_style = "default", -- default/round/block/arrow
-
-		-- or
-		-- custom separators
-		-- separator_style = {
-		--    left = " ",
-		--    right = "",
-		--  },
-
-		overriden_modules = nil,
-	},
-
-	-- lazyload it when there are 1+ buffers
-	tabufline = {
-		enabled = true,
-		lazyload = true,
-		overriden_modules = nil,
-	},
-}
-
 M.treesitter = {
 	ensure_installed = {
 		"vim",
 		"lua",
 		"html",
 		"css",
-		"typescript",
+		"javascript",
 		"c",
+		"markdown",
+		"markdown_inline",
 		"python",
 		"rust",
 	},
 	indent = {
 		enable = true,
-		disable = { "python" },
+		-- disable = {
+		--   "python"
+		-- },
 	},
 }
 
