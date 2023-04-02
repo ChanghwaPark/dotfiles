@@ -39,6 +39,13 @@ M.general = {
 		["sk"] = { "<C-w>k", "move up" },
 		["sl"] = { "<C-w>l", "move right" },
 
+		["zj"] = { "o<Esc>k", "insert a new line under the cursor" },
+		["zk"] = { "O<Esc>j", "insert a new line above the cursor" },
+	},
+}
+
+M.ui = {
+	n = {
 		["<leader>tt"] = {
 			function()
 				require("base46").toggle_transparency()

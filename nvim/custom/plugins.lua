@@ -49,6 +49,7 @@ local plugins = {
 	-- CSV plugin
 	{
 		"chrisbra/csv.vim",
+		ft = "csv",
 	},
 
 	-- Tabnine AI assistant
@@ -70,13 +71,19 @@ local plugins = {
 	-- Debugging
 	{
 		"mfussenegger/nvim-dap",
-		-- lazy = false,
 	},
 	{
 		"rcarriga/nvim-dap-ui",
-		config = function()
-			require("mfussenegger/nvim-dap")
-		end,
+		dependencies = { "mfussenegger/nvim-dap" },
+	},
+	{
+		"theHamsta/nvim-dap-virtual-text",
+	},
+	{
+		"nvim-telescope/telescope-dap.nvim",
+	},
+	{
+		"mfussenegger/nvim-dap-python",
 	},
 
 	-- To make a plugin not be loaded
