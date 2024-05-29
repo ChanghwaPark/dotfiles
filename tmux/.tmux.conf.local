@@ -360,6 +360,8 @@ set -g mouse on
 #set -g status-keys vi
 set -g mode-keys vi
 
+set-option -g repeat-time 0
+
 # replace C-b by C-a instead of using both prefixes
 # set -gu prefix2
 # unbind C-a
