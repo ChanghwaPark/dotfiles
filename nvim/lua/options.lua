@@ -25,4 +25,4 @@ for _, plugin in pairs(enable_providers) do
 	vim.cmd("runtime " .. plugin)
 end
 
-vim.g["python3_host_prog"] = "/opt/homebrew/bin/python3"
+vim.g["python3_host_prog"] = "/home/dexter/miniconda3/bin/python3"

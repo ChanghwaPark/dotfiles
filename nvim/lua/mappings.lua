@@ -63,3 +63,6 @@ end, { desc = "Reset hunk" })
 map("n", "<leader>ph", function()
 	require("gitsigns").preview_hunk()
 end, { desc = "Preview hunk" })
+
+map("n", "j", "jzz", { desc = "move down and center the cursor" })
+map("n", "k", "kzz", { desc = "move down and center the cursor" })
