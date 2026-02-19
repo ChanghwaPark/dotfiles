@@ -1,8 +1,9 @@
-require("nvchad.mappings")
+require "nvchad.mappings"
 
 -- add yours here
 
 local map = vim.keymap.set
+local del = vim.keymap.del
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("n", "<C-s>", "<cmd> w <cr>")
@@ -35,34 +36,37 @@ map("n", "zj", "o<Esc>k", { desc = "insert a new line under the cursor" })
 map("n", "zk", "O<Esc>j", { desc = "insert a new line above the cursor" })
 
 map("n", "<leader>tt", function()
-	require("base46").toggle_transparency()
+  require("base46").toggle_transparency()
 end, { desc = "toggle transparency" })
 
 map("n", "]c", function()
-	if vim.wo.diff then
-		return "]c"
-	end
-	vim.schedule(function()
-		require("gitsigns").next_hunk()
-	end)
-	return "<Ignore>"
+  if vim.wo.diff then
+    return "]c"
+  end
+  vim.schedule(function()
+    require("gitsigns").next_hunk()
+  end)
+  return "<Ignore>"
 end, { desc = "Jump to next hunk", expr = true })
 map("n", "[c", function()
-	if vim.wo.diff then
-		return "[c"
-	end
-	vim.schedule(function()
-		require("gitsigns").prev_hunk()
-	end)
-	return "<Ignore>"
+  if vim.wo.diff then
+    return "[c"
+  end
+  vim.schedule(function()
+    require("gitsigns").prev_hunk()
+  end)
+  return "<Ignore>"
 end, { desc = "Jump to prev hunk", expr = true })
 
 map("n", "<leader>rh", function()
-	require("gitsigns").reset_hunk()
+  require("gitsigns").reset_hunk()
 end, { desc = "Reset hunk" })
 map("n", "<leader>ph", function()
-	require("gitsigns").preview_hunk()
+  require("gitsigns").preview_hunk()
 end, { desc = "Preview hunk" })
 
 map("n", "j", "jzz", { desc = "move down and center the cursor" })
 map("n", "k", "kzz", { desc = "move down and center the cursor" })
+
+del("i", "<M-Right>")
+map("i", "<M-Right>", "<Plug>(copilot-accept-line)", { desc = "Accept the next line of the current suggestion" })
