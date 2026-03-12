@@ -1,4 +1,4 @@
-require "nvchad.mappings"
+require("nvchad.mappings")
 
 -- add yours here
 
@@ -36,37 +36,59 @@ map("n", "zj", "o<Esc>k", { desc = "insert a new line under the cursor" })
 map("n", "zk", "O<Esc>j", { desc = "insert a new line above the cursor" })
 
 map("n", "<leader>tt", function()
-  require("base46").toggle_transparency()
+	require("base46").toggle_transparency()
 end, { desc = "toggle transparency" })
 
 map("n", "]c", function()
-  if vim.wo.diff then
-    return "]c"
-  end
-  vim.schedule(function()
-    require("gitsigns").next_hunk()
-  end)
-  return "<Ignore>"
+	if vim.wo.diff then
+		return "]c"
+	end
+	vim.schedule(function()
+		require("gitsigns").next_hunk()
+	end)
+	return "<Ignore>"
 end, { desc = "Jump to next hunk", expr = true })
 map("n", "[c", function()
-  if vim.wo.diff then
-    return "[c"
-  end
-  vim.schedule(function()
-    require("gitsigns").prev_hunk()
-  end)
-  return "<Ignore>"
+	if vim.wo.diff then
+		return "[c"
+	end
+	vim.schedule(function()
+		require("gitsigns").prev_hunk()
+	end)
+	return "<Ignore>"
 end, { desc = "Jump to prev hunk", expr = true })
 
 map("n", "<leader>rh", function()
-  require("gitsigns").reset_hunk()
+	require("gitsigns").reset_hunk()
 end, { desc = "Reset hunk" })
 map("n", "<leader>ph", function()
-  require("gitsigns").preview_hunk()
+	require("gitsigns").preview_hunk()
 end, { desc = "Preview hunk" })
 
 map("n", "j", "jzz", { desc = "move down and center the cursor" })
-map("n", "k", "kzz", { desc = "move down and center the cursor" })
+map("n", "k", "kzz", { desc = "move up and center the cursor" })
 
-del("i", "<M-Right>")
+-- del("i", "<M-Right>")
 map("i", "<M-Right>", "<Plug>(copilot-accept-line)", { desc = "Accept the next line of the current suggestion" })
+
+-- Copilot Chat
+map("n", "<leader>cc", "<cmd>CopilotChatToggle<cr>", { desc = "CopilotChat Toggle" })
+map("n", "<leader>co", "<cmd>CopilotChatOpen<cr>", { desc = "CopilotChat Open" })
+map("n", "<leader>cx", "<cmd>CopilotChatClose<cr>", { desc = "CopilotChat Close" })
+map("n", "<leader>cr", "<cmd>CopilotChatReset<cr>", { desc = "CopilotChat Reset" })
+map("n", "<leader>cp", "<cmd>CopilotChatPrompts<cr>", { desc = "CopilotChat Prompts" })
+map("n", "<leader>cm", "<cmd>CopilotChatModels<cr>", { desc = "CopilotChat Models" })
+
+map("v", "<leader>ce", "<cmd>CopilotChat Explain<cr>", { desc = "CopilotChat Explain selection" })
+map("v", "<leader>cv", "<cmd>CopilotChat Review<cr>", { desc = "CopilotChat Review selection" })
+map("v", "<leader>cf", "<cmd>CopilotChat Fix<cr>", { desc = "CopilotChat Fix selection" })
+map("v", "<leader>ct", "<cmd>CopilotChat Tests<cr>", { desc = "CopilotChat Tests for selection" })
+
+-- Diffview
+map("n", "<leader>gd", "<cmd>DiffviewOpen<cr>", { desc = "Diffview open" })
+map("n", "<leader>gD", "<cmd>DiffviewClose<cr>", { desc = "Diffview close" })
+
+-- Trouble (diagnostics / quickfix)
+map("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Trouble diagnostics toggle" })
+map("n", "<leader>xq", "<cmd>Trouble qflist toggle<cr>", { desc = "Trouble quickfix toggle" })
+map("n", "<leader>xl", "<cmd>Trouble loclist toggle<cr>", { desc = "Trouble loclist toggle" })
