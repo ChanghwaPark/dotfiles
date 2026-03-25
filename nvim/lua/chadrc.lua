@@ -6,19 +6,28 @@
 local M = {}
 
 M.base46 = {
-  theme = "doomchad",
-  transparency = true,
+	theme = "tokyonight",
+	transparency = true,
 
-  h1_add = {
-    NvimTreeOpenedFolderName = { fg = "green", bold = true },
-  },
-  hl_override = {
-    Comment = { italic = true },
-    ["@comment"] = { italic = true },
-  },
+	hl_add = {
+		NvimTreeOpenedFolderName = { fg = "green", bold = true },
+	},
+	hl_override = {
+		Comment = { italic = true },
+	},
 }
+
 M.nvdash = {
-  load_on_startup = true,
+	load_on_startup = true,
+}
+
+M.ui = {
+	statusline = {
+		theme = "vscode_colored",
+	},
+	tabufline = {
+		lazyload = true,
+	},
 }
 
 return M

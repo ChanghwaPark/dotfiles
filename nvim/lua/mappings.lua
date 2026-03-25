@@ -6,7 +6,7 @@ local map = vim.keymap.set
 local del = vim.keymap.del
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
-map("n", "<C-s>", "<cmd> w <cr>")
+map("n", "<C-s>", "<cmd> w <cr>", { desc = "save file" })
 
 -- Scroll cursor center
 map("n", "<C-u>", "<C-u>zz", { desc = "scroll upwards and center the cursor" })
@@ -16,7 +16,7 @@ map("n", "<C-d>", "<C-d>zz", { desc = "scroll downwards and center the cursor" }
 map("n", "n", "nzzzv", { desc = "search next and center the cursor" })
 map("n", "N", "Nzzzv", { desc = "search previous and center the cursor" })
 
-map("n", "x", '"_x', { desc = "" })
+map("n", "x", '"_x', { desc = "delete char without yanking" })
 
 -- Increment/decrement
 map("n", "+", "<C-a>", { desc = "increment" })
@@ -82,10 +82,10 @@ map("n", "<leader>cr", "<cmd>CopilotChatReset<cr>", { desc = "CopilotChat Reset"
 map("n", "<leader>cp", "<cmd>CopilotChatPrompts<cr>", { desc = "CopilotChat Prompts" })
 map("n", "<leader>cm", "<cmd>CopilotChatModels<cr>", { desc = "CopilotChat Models" })
 
-map("v", "<leader>ce", "<cmd>CopilotChat Explain<cr>", { desc = "CopilotChat Explain selection" })
-map("v", "<leader>cv", "<cmd>CopilotChat Review<cr>", { desc = "CopilotChat Review selection" })
-map("v", "<leader>cf", "<cmd>CopilotChat Fix<cr>", { desc = "CopilotChat Fix selection" })
-map("v", "<leader>ct", "<cmd>CopilotChat Tests<cr>", { desc = "CopilotChat Tests for selection" })
+map("v", "<leader>ce", "<cmd>CopilotChatExplain<cr>", { desc = "CopilotChat Explain selection" })
+map("v", "<leader>cv", "<cmd>CopilotChatReview<cr>", { desc = "CopilotChat Review selection" })
+map("v", "<leader>cf", "<cmd>CopilotChatFix<cr>", { desc = "CopilotChat Fix selection" })
+map("v", "<leader>ct", "<cmd>CopilotChatTests<cr>", { desc = "CopilotChat Tests for selection" })
 
 -- Diffview
 map("n", "<leader>gd", "<cmd>DiffviewOpen<cr>", { desc = "Diffview open" })

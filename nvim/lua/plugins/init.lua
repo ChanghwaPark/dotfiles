@@ -5,7 +5,6 @@ return {
 		opts = require("configs.conform"),
 	},
 
-	-- These are some examples, uncomment them if you want to see them work!
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
@@ -24,9 +23,6 @@ return {
 				-- web dev stuff
 				"css-lsp",
 				"html-lsp",
-				"typescript-language-server",
-				"deno",
-				"emmet-ls",
 				"json-lsp",
 				"prettier",
 
@@ -171,7 +167,6 @@ return {
 	{
 		"folke/trouble.nvim",
 		cmd = { "Trouble" },
-		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = { focus = true },
 	},
 	{
@@ -180,7 +175,7 @@ return {
 		cmd = "Neogen",
 		config = function()
 			require("neogen").setup({
-				snippet_engine = "luasnip", -- NvChad 기본이 luasnip인 경우가 많음
+				snippet_engine = "nvim",
 				enabled = true,
 				languages = {
 					python = {
@@ -197,7 +192,7 @@ return {
 	-- Git
 	{
 		"tpope/vim-fugitive",
-		lazy = false,
+		cmd = { "Git", "G" },
 	},
 
 	{
