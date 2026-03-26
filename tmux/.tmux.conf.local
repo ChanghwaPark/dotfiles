@@ -1,4 +1,6 @@
-# : << EOF
+# : << 'EOF'
+# Oh my tmux!
+# 💛🩷💙🖤❤️🤍
 # https://github.com/gpakosz/.tmux
 # (‑●‑●)> dual licensed under the WTFPL v2 license and the MIT license,
 #         without any warranty.
@@ -84,23 +86,23 @@ tmux_conf_24b_colour=auto
 tmux_conf_theme=enabled
 
 # default theme
-tmux_conf_theme_colour_1="#080808"    # dark gray
-tmux_conf_theme_colour_2="#303030"    # gray
-tmux_conf_theme_colour_3="#8a8a8a"    # light gray
-tmux_conf_theme_colour_4="#00afff"    # light blue
-tmux_conf_theme_colour_5="#ffff00"    # yellow
-tmux_conf_theme_colour_6="#080808"    # dark gray
-tmux_conf_theme_colour_7="#e4e4e4"    # white
-tmux_conf_theme_colour_8="#080808"    # dark gray
-tmux_conf_theme_colour_9="#ffff00"    # yellow
-tmux_conf_theme_colour_10="#ff00af"   # pink
-tmux_conf_theme_colour_11="#5fff00"   # green
-tmux_conf_theme_colour_12="#8a8a8a"   # light gray
-tmux_conf_theme_colour_13="#e4e4e4"   # white
-tmux_conf_theme_colour_14="#080808"   # dark gray
-tmux_conf_theme_colour_15="#080808"   # dark gray
-tmux_conf_theme_colour_16="#d70000"   # red
-tmux_conf_theme_colour_17="#e4e4e4"   # white
+tmux_conf_theme_colour_1="#1a1b26"    # tokyonight bg
+tmux_conf_theme_colour_2="#24283b"    # tokyonight bg_highlight
+tmux_conf_theme_colour_3="#565f89"    # tokyonight comment
+tmux_conf_theme_colour_4="#7aa2f7"    # tokyonight blue
+tmux_conf_theme_colour_5="#e0af68"    # tokyonight yellow
+tmux_conf_theme_colour_6="#1a1b26"    # tokyonight bg
+tmux_conf_theme_colour_7="#c0caf5"    # tokyonight fg
+tmux_conf_theme_colour_8="#1a1b26"    # tokyonight bg
+tmux_conf_theme_colour_9="#e0af68"    # tokyonight yellow
+tmux_conf_theme_colour_10="#bb9af7"   # tokyonight purple
+tmux_conf_theme_colour_11="#9ece6a"   # tokyonight green
+tmux_conf_theme_colour_12="#565f89"   # tokyonight comment
+tmux_conf_theme_colour_13="#c0caf5"   # tokyonight fg
+tmux_conf_theme_colour_14="#1a1b26"   # tokyonight bg
+tmux_conf_theme_colour_15="#1a1b26"   # tokyonight bg
+tmux_conf_theme_colour_16="#f7768e"   # tokyonight red
+tmux_conf_theme_colour_17="#c0caf5"   # tokyonight fg
 
 # default theme (ansi)
 #tmux_conf_theme_colour_1="colour0"
@@ -128,10 +130,10 @@ tmux_conf_theme_window_bg="default"
 # highlight focused pane, possible values are:
 #   - true
 #   - false (default)
-tmux_conf_theme_highlight_focused_pane=false
+tmux_conf_theme_highlight_focused_pane=true
 
 # focused pane colours:
-tmux_conf_theme_focused_pane_bg="$tmux_conf_theme_colour_2"
+tmux_conf_theme_focused_pane_bg="#24283b"
 
 # pane border style, possible values are:
 #   - thin (default)
@@ -139,26 +141,29 @@ tmux_conf_theme_focused_pane_bg="$tmux_conf_theme_colour_2"
 tmux_conf_theme_pane_border_style=thin
 
 # pane borders colours:
-tmux_conf_theme_pane_border="#073642"
-tmux_conf_theme_pane_active_border="#eee8d5"
+tmux_conf_theme_pane_border="#24283b"
+tmux_conf_theme_pane_active_border="#7aa2f7"
+%if #{>=:#{version},3.2}
+tmux_conf_theme_pane_active_border="#{?pane_in_mode,$tmux_conf_theme_colour_9,#{?synchronize-panes,$tmux_conf_theme_colour_16,#7aa2f7}}"
+%endif
 
 # pane indicator colours (when you hit <prefix> + q)
 tmux_conf_theme_pane_indicator="$tmux_conf_theme_colour_4"
 tmux_conf_theme_pane_active_indicator="$tmux_conf_theme_colour_4"
 
 # status line style
-tmux_conf_theme_message_fg="#eee8d5"
-tmux_conf_theme_message_bg="#073642"
+tmux_conf_theme_message_fg="#c0caf5"
+tmux_conf_theme_message_bg="#24283b"
 tmux_conf_theme_message_attr="bold"
 
 # status line command style (<prefix> : Escape)
-tmux_conf_theme_message_command_fg="#eee8d5"
-tmux_conf_theme_message_command_bg="#073642"
+tmux_conf_theme_message_command_fg="#c0caf5"
+tmux_conf_theme_message_command_bg="#24283b"
 tmux_conf_theme_message_command_attr="bold"
 
 # window modes style
-tmux_conf_theme_mode_fg="#eee8d5"
-tmux_conf_theme_mode_bg="#073642"
+tmux_conf_theme_mode_fg="#c0caf5"
+tmux_conf_theme_mode_bg="#24283b"
 tmux_conf_theme_mode_attr="bold"
 
 # status line style
@@ -188,11 +193,10 @@ tmux_conf_theme_terminal_title="#h ❐ #S ● #I #W"
 #     - #{hostname_full_ssh}
 #     - #{username}
 #     - #{username_ssh}
-tmux_conf_theme_window_status_fg="#839496"
-tmux_conf_theme_window_status_bg="#002b36"
+tmux_conf_theme_window_status_fg="#565f89"
+tmux_conf_theme_window_status_bg="#1a1b26"
 tmux_conf_theme_window_status_attr="none"
-# tmux_conf_theme_window_status_format="#I #W#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,!,}#{?window_zoomed_flag,Z,}"
-tmux_conf_theme_window_status_format='#[fg=#002b36,bg=#002b36]#[default] #I  #{b:pane_current_path} #[fg=#002b36,bg=#002b36,nobold,nounderscore,noitalics]'
+tmux_conf_theme_window_status_format='#[fg=#565f89,bg=#1a1b26] #I  #{b:pane_current_path} '
 #tmux_conf_theme_window_status_format="#{circled_window_index} #W#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,!,}#{?window_zoomed_flag,Z,}"
 #tmux_conf_theme_window_status_format="#I #W#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,🔔,}#{?window_zoomed_flag,🔍,}"
 
@@ -206,18 +210,16 @@ tmux_conf_theme_window_status_format='#[fg=#002b36,bg=#002b36]#[default] #I �
 #     - #{hostname_full_ssh}
 #     - #{username}
 #     - #{username_ssh}
-tmux_conf_theme_window_status_current_fg="colour166"
-tmux_conf_theme_window_status_current_bg="default"
-# tmux_conf_theme_window_status_current_attr="bold"
+tmux_conf_theme_window_status_current_fg="#7aa2f7"
+tmux_conf_theme_window_status_current_bg="#1a1b26"
 tmux_conf_theme_window_status_current_attr="bright"
-# tmux_conf_theme_window_status_current_format="#I #W#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,!,}#{?window_zoomed_flag,Z,}"
-tmux_conf_theme_window_status_current_format='#[fg=#002b36,bg=#eee8d5]#[fg=#b58900,bg=#eee8d5] #I #[fg=#eee8d5,bg=#b58900] #{b:pane_current_path} #[fg=#b58900,bg=#002b36,nobold]'
+tmux_conf_theme_window_status_current_format='#[fg=#7aa2f7,bg=#1a1b26]#[fg=#1a1b26,bg=#7aa2f7,bold] #I  #{b:pane_current_path} #[fg=#7aa2f7,bg=#1a1b26,nobold]'
 #tmux_conf_theme_window_status_current_format="#{circled_window_index} #W#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,!,}#{?window_zoomed_flag,Z,}"
 #tmux_conf_theme_window_status_current_format="#I #W#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,🔔,}#{?window_zoomed_flag,🔍,}"
 
 # window activity status style
-tmux_conf_theme_window_status_activity_fg="#839496"
-tmux_conf_theme_window_status_activity_bg="#002b36"
+tmux_conf_theme_window_status_activity_fg="#565f89"
+tmux_conf_theme_window_status_activity_bg="#1a1b26"
 tmux_conf_theme_window_status_activity_attr="underscore"
 
 # window bell status style
@@ -231,10 +233,10 @@ tmux_conf_theme_window_status_last_bg="$tmux_conf_theme_colour_2"
 tmux_conf_theme_window_status_last_attr="none"
 
 # status left/right sections separators
-tmux_conf_theme_left_separator_main=""
-tmux_conf_theme_left_separator_sub="|"
-tmux_conf_theme_right_separator_main=""
-tmux_conf_theme_right_separator_sub="|"
+tmux_conf_theme_left_separator_main=
+tmux_conf_theme_left_separator_sub=
+tmux_conf_theme_right_separator_main=
+tmux_conf_theme_right_separator_sub=
 #tmux_conf_theme_left_separator_main='\uE0B0'  # /!\ you don't need to install Powerline
 #tmux_conf_theme_left_separator_sub='\uE0B1'   #   you only need fonts patched with
 #tmux_conf_theme_right_separator_main='\uE0B2' #   Powerline symbols or the standalone
@@ -267,19 +269,18 @@ tmux_conf_theme_right_separator_sub="|"
 #     - #{uptime_s}
 #     - #{username}
 #     - #{username_ssh}
-# tmux_conf_theme_status_left=" ❐ #S | ↑#{?uptime_y, #{uptime_y}y,}#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} "
-tmux_conf_theme_status_left="#[fg=#073642,bg=#eee8d5,bold] #S #[fg=#eee8d5,bg=#93a1a1,nobold,nounderscore,noitalics]#[fg=#15161E,bg=#93a1a1,bold] #(whoami) #[fg=#93a1a1,bg=#002b36]"
-# tmux_conf_theme_status_right=" #{prefix}#{mouse}#{pairing}#{synchronized}#{?battery_status,#{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , %R , %d %b | #{username}#{root} | #{hostname} "
-tmux_conf_theme_status_right="#[fg=#586e75,bg=#002b36,nobold,nounderscore,noitalics]#[fg=#002b36,bg=#586e75]#{prefix}#{mouse}#{pairing}#{synchronized}#[fg=#657b83,bg=#586e75,nobold,nounderscore,noitalics]#[fg=#002b36,bg=#657b83]#{?battery_status,#{battery_status},}#{?battery_vbar, #{battery_vbar},}#{?battery_percentage, #{battery_percentage},} #{cpu_bg_color} CPU: #{cpu_percentage} #{gpu_bg_color} GPU: #{gpu_percentage} #{ram_bg_color} RAM: #{ram_percentage} #[fg=#93a1a1,bg=#657b83,nobold,nounderscore,noitalics]#[fg=#15161E,bg=#93a1a1,bold]%R %d %b "
+tmux_conf_theme_status_left="#[fg=#1a1b26,bg=#7aa2f7,bold] #S #[fg=#7aa2f7,bg=#737aa2,nobold,nounderscore,noitalics]#[fg=#1a1b26,bg=#737aa2,bold] #(whoami) #[fg=#737aa2,bg=#1a1b26]"
+#tmux_conf_theme_status_left="#[fg=#1a1b26,bg=#7aa2f7,bold] #S #[fg=#7aa2f7,bg=#737aa2,nobold,nounderscore,noitalics]#[fg=#1a1b26,bg=#737aa2,bold] #(whoami) #[fg=#737aa2,bg=#1a1b26]"
+tmux_conf_theme_status_right="#{weather} #[fg=#565f89,bg=#1a1b26] #[fg=#9ece6a,bg=#1a1b26]#[fg=#1a1b26,bg=#9ece6a] #{battery_status} #{battery_percentage} #[fg=#9ece6a,bg=#1a1b26] #[fg=#24283b,bg=#1a1b26]#[fg=#9ece6a,bg=#24283b] CPU #{cpu_percentage}#[fg=#565f89] │ #[fg=#bb9af7]RAM #{ram_percentage}#[fg=#565f89] │ #[fg=#7dcfff]GPU #{gpu_percentage} #[fg=#24283b,bg=#1a1b26] #[fg=#7aa2f7,bg=#1a1b26]#[fg=#1a1b26,bg=#7aa2f7,bold] #{korean_date} #[fg=#7aa2f7,bg=#1a1b26,nobold]"
 
 # status left style
-tmux_conf_theme_status_left_fg="$tmux_conf_theme_colour_6,$tmux_conf_theme_colour_7,$tmux_conf_theme_colour_8"
-tmux_conf_theme_status_left_bg="$tmux_conf_theme_colour_9,$tmux_conf_theme_colour_10,$tmux_conf_theme_colour_11"
+tmux_conf_theme_status_left_fg="#1a1b26,#1a1b26,#1a1b26"
+tmux_conf_theme_status_left_bg="#7aa2f7,#737aa2,#1a1b26"
 tmux_conf_theme_status_left_attr="bold,none,none"
 
 # status right style
-tmux_conf_theme_status_right_fg="$tmux_conf_theme_colour_12,$tmux_conf_theme_colour_13,$tmux_conf_theme_colour_14"
-tmux_conf_theme_status_right_bg="$tmux_conf_theme_colour_15,$tmux_conf_theme_colour_16,$tmux_conf_theme_colour_17"
+tmux_conf_theme_status_right_fg="#c0caf5,#1a1b26,#1a1b26"
+tmux_conf_theme_status_right_bg="#565f89,#9ece6a,#7aa2f7"
 tmux_conf_theme_status_right_attr="none,none,bold"
 
 # pairing indicator
@@ -327,22 +328,28 @@ tmux_conf_battery_bar_length="auto"
 #   - gradient (default)
 #   - heat
 #   - "colour_full_fg,colour_empty_fg,colour_bg"
+#   - gradient(colour_fg_1,colour_fg_2,...,colour_fg_n)
 tmux_conf_battery_bar_palette="gradient"
 #tmux_conf_battery_bar_palette="#d70000,#e4e4e4,#000000"   # red, white, black
+#tmux_conf_battery_bar_palette="gradient(#00afff,#47a2ff,#7c91ff,#ac7afb,#d65be2,#e163df,#eb6cdd,#f475db,#ec9ff1,#eac3fe,#efe2ff,#ffffff)"
 
 # battery hbar palette, possible values are:
 #   - gradient (default)
 #   - heat
 #   - "colour_low,colour_half,colour_full"
+#   - gradient(colour_fg_1,colour_fg_2,...,colour_fg_n)
 tmux_conf_battery_hbar_palette="gradient"
 #tmux_conf_battery_hbar_palette="#d70000,#ff5f00,#5fff00"  # red, orange, green
+#tmux_conf_battery_hbar_palette="gradient(#00afff,#47a2ff,#7c91ff,#ac7afb,#d65be2,#e163df,#eb6cdd,#f475db,#ec9ff1,#eac3fe,#efe2ff,#ffffff)"
 
 # battery vbar palette, possible values are:
 #   - gradient (default)
 #   - heat
 #   - "colour_low,colour_half,colour_full"
+#   - gradient(colour_fg_1,colour_fg_2,...,colour_fg_n)
 tmux_conf_battery_vbar_palette="gradient"
 #tmux_conf_battery_vbar_palette="#d70000,#ff5f00,#5fff00"  # red, orange, green
+#tmux_conf_battery_vbar_palette="gradient(#00afff,#47a2ff,#7c91ff,#ac7afb,#d65be2,#e163df,#eb6cdd,#f475db,#ec9ff1,#eac3fe,#efe2ff,#ffffff)"
 
 # symbols used to indicate whether battery is charging or discharging
 tmux_conf_battery_status_charging="↑"       # U+2191
@@ -366,7 +373,6 @@ tmux_conf_theme_clock_style="24"
 tmux_conf_copy_to_os_clipboard=true
 
 
-set-option -sa terminal-overrides ',xterm-256color:RGB'
 # -- urlscan -------------------------------------------------------------------
 
 # options passed to urlscan
@@ -397,12 +403,6 @@ set-option -g repeat-time 0
 # set -g prefix C-a
 # bind C-a send-prefix
 
-# if you don't want Oh my tmux! to alter a binding, use #!important
-# bind c new-window -c '#{pane_current_path}' #!important
-
-# move status line to top
-#set -g status-position top
-
 # use only C-b instead of using both prefixes
 set -gu prefix2
 unbind C-a
@@ -415,6 +415,21 @@ unbind p
 unbind n
 bind p previous-window
 bind n next-window
+
+# if you don't want Oh my tmux! to alter a binding or a setting, use #!important
+# bind c new-window -c '#{pane_current_path}' #!important
+
+# display a message after toggling mouse support
+bind m run "cut -c3- '#{TMUX_CONF}' | sh -s _toggle_mouse" \; display 'mouse #{?#{mouse},on,off}'
+
+# move status line to top
+#set -g status-position top
+
+set-option -sa terminal-overrides ',xterm-256color:RGB'
+set -g allow-passthrough on
+set -ga update-environment TERM
+set -ga update-environment TERM_PROGRAM
+
 
 # -- tpm -----------------------------------------------------------------------
 
@@ -449,6 +464,7 @@ tmux_conf_uninstall_plugins_on_reload=true
 # /!\ do not add set -g @plugin 'tmux-plugins/tpm'
 # /!\ do not add run '~/.tmux/plugins/tpm/tpm'
 
+# /!\ the 'set -g @tpm_plugins' syntax is not supported
 # to enable a plugin, use the 'set -g @plugin' syntax:
 # visit https://github.com/tmux-plugins for available plugins
 set -g @plugin 'tmux-plugins/tmux-copycat'
@@ -458,9 +474,6 @@ set -g @plugin 'tmux-plugins/tmux-continuum'
 set -g @continuum-restore 'on'
 set -g @plugin 'tmux-plugins/tmux-yank'
 
-set -g allow-passthrough on
-set -ga update-environment TERM
-set -ga update-environment TERM_PROGRAM
 
 # -- custom variables ----------------------------------------------------------
 
@@ -479,23 +492,52 @@ set -ga update-environment TERM_PROGRAM
 #
 # # /!\ do not "uncomment" the functions: the leading "# " characters are needed
 #
+# # usage: #{weather}
 # weather() {                                         # see https://github.com/chubin/wttr.in#one-line-output
 #   curl -f -s -m 2 'wttr.in?format=3' || printf '\n' # /!\ make sure curl is installed
 #   sleep 900                                         # sleep for 15 minutes, throttle network requests whatever the value of status-interval
 # }
 #
+# # usage: #{online}
 # online() {
 #   ping -c 1 1.1.1.1 >/dev/null 2>&1 && printf '✔' || printf '✘'
 # }
 #
+# # usage: #{wan_ip_v4}
 # wan_ip_v4() {
 #   curl -f -s -m 2 -4 ifconfig.me
 #   sleep 300                                         # sleep for 5 minutes, throttle network requests whatever the value of status-interval
 # }
 #
+# # usage: #{wan_ip_v6}
 # wan_ip_v6() {
 #   curl -f -s -m 2 -6 ifconfig.me
 #   sleep 300                                         # sleep for 5 minutes, throttle network requests whatever the value of status-interval
+# }
+#
+# # usage: #{github_stars}, #{github_stars tmux/tmux}, ...
+# github_stars() {
+#   repository=${1##*https://github.com/}
+#   repository=${repository%% *}
+#   repository=${repository%%.git}
+#   url="https://api.github.com/repos/${repository:-gpakosz/.tmux}"
+#   curl -s "$url" | perl -MJSON::PP=decode_json -CO -0777 -E '$response = decode_json(readline *STDIN); say ($response->{stargazers_count})'
+#   sleep 300                                         # sleep for 5 minutes, throttle network requests whatever the value of status-interval
+# }
+#
+
+# weather() {
+#   curl -f -s -m 3 'wttr.in/Seoul?format=%c%t' 2>/dev/null || echo '?'
+#   sleep 900
+# }
+#
+# korean_date() {
+#   d=$(date '+%H:%M  %-m월 %-d일 ')
+#   case $(date +%u) in
+#     1) echo "${d}월";; 2) echo "${d}화";; 3) echo "${d}수";;
+#     4) echo "${d}목";; 5) echo "${d}금";; 6) echo "${d}토";; *) echo "${d}일";;
+#   esac
+#   sleep 5
 # }
 #
 # "$@"
