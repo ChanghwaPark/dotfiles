@@ -49,16 +49,6 @@ rev = "1962818"
 hash = "8b177921e50732b2c8e9d71aa5956270"
 
 [[plugin.deps]]
-use = "Rolv-Apneseth/starship.yazi:starship"
-rev = "a837101"
-hash = "99aa06d3014798d86001c324468d497f"
-
-[[plugin.deps]]
-use = "dedukun/bookmarks.yazi:bookmarks"
-rev = "9ef1254"
-hash = "99aa06d3014798d86001c324468d497f"
-
-[[plugin.deps]]
 use = "yazi-rs/flavors:tokyo-night"
 rev = "9511cb0"
 hash = "99aa06d3014798d86001c324468d497f"
@@ -67,6 +57,16 @@ hash = "99aa06d3014798d86001c324468d497f"
 use = "yazi-rs/plugins:piper"
 rev = "1962818"
 hash = "384464b6df8cb807425c521f8cd790f3"
+
+[[plugin.deps]]
+use = "dedukun/bookmarks"
+rev = "9ef1254"
+hash = "92fbb5483657fa7976cdf4e0104e18e0"
+
+[[plugin.deps]]
+use = "Rolv-Apneseth/starship"
+rev = "a837101"
+hash = "635b0feb9215772d22020eb0abf0bb34"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
