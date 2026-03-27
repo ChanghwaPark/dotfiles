@@ -10,3 +10,4 @@ private_dot_config/karabiner
 {{ if and (eq .chezmoi.os "linux") (not .isDesktop) }}
 private_dot_config/ghostty
 {{ end }}
+.config/yazi/plugins/
