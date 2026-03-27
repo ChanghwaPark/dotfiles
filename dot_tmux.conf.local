@@ -427,9 +427,9 @@ bind m run "cut -c3- '#{TMUX_CONF}' | sh -s _toggle_mouse" \; display 'mouse #{?
 
 # sesh session picker (popup closes immediately on selection; sesh connect runs in background)
 bind T display-popup -E -h "70%" -w "80%" "fzf \
-    --no-sort --ansi --border-label ' sesh ' --prompt '⚡  ' \
+    --no-sort --ansi --border-label ' sesh ' --prompt '🪟  ' \
     --header '  ^a all ^t tmux ^g configs ^x zoxide ^d kill ^f find ^n new' \
-    --bind 'start:reload(sesh list --icons)' \
+    --bind 'start:reload(sesh list -t --icons)' \
     --bind 'tab:down,btab:up' \
     --bind 'enter:execute-silent(sesh connect {})+abort' \
     --bind 'ctrl-a:change-prompt(⚡  )+reload(sesh list --icons)' \
@@ -446,6 +446,7 @@ bind T display-popup -E -h "70%" -w "80%" "fzf \
 #set -g status-position top
 
 set-option -sa terminal-overrides ',xterm-256color:RGB'
+set-option -gw monitor-bell on
 set -g allow-passthrough on
 set -ga update-environment TERM
 set -ga update-environment TERM_PROGRAM
