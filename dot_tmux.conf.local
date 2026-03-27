@@ -425,13 +425,13 @@ bind L switch-client -l #!important
 # display a message after toggling mouse support
 bind m run "cut -c3- '#{TMUX_CONF}' | sh -s _toggle_mouse" \; display 'mouse #{?#{mouse},on,off}'
 
-# sesh session picker (async: fzf opens immediately, list loads in background)
-bind T display-popup -E -h "70%" -w "80%" "sesh connect \"\$(
-  fzf \
+# sesh session picker (popup closes immediately on selection; sesh connect runs in background)
+bind T display-popup -E -h "70%" -w "80%" "fzf \
     --no-sort --ansi --border-label ' sesh ' --prompt '⚡  ' \
     --header '  ^a all ^t tmux ^g configs ^x zoxide ^d kill ^f find ^n new' \
     --bind 'start:reload(sesh list --icons)' \
     --bind 'tab:down,btab:up' \
+    --bind 'enter:execute-silent(sesh connect {})+abort' \
     --bind 'ctrl-a:change-prompt(⚡  )+reload(sesh list --icons)' \
     --bind 'ctrl-t:change-prompt(🪟  )+reload(sesh list -t --icons)' \
     --bind 'ctrl-g:change-prompt(⚙️  )+reload(sesh list -c --icons)' \
@@ -440,8 +440,7 @@ bind T display-popup -E -h "70%" -w "80%" "sesh connect \"\$(
     --bind 'ctrl-d:execute(tmux kill-session -t {2..})+change-prompt(⚡  )+reload(sesh list --icons)' \
     --bind 'ctrl-n:become(tmux new-session -ds {q} && tmux switch-client -t {q})' \
     --preview-window 'right:55%' \
-    --preview 'tmux capture-pane -pt {2..}' \
-)\""
+    --preview 'tmux capture-pane -pt {2..}'"
 
 # move status line to top
 #set -g status-position top
