@@ -1,0 +1,11 @@
+{{- $email := promptStringOnce . "email" "Git email address" -}}
+{{- $isDesktop := false -}}
+{{- if eq .chezmoi.os "linux" -}}
+{{-   $isDesktop = promptBoolOnce . "isDesktop" "Is this a desktop machine (with GUI)?" -}}
+{{- else -}}
+{{-   $isDesktop = true -}}
+{{- end -}}
+
+[data]
+    email = {{ $email | quote }}
+    isDesktop = {{ $isDesktop }}

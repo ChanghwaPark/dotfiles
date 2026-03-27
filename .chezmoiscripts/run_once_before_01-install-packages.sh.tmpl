@@ -1,0 +1,123 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+{{ if eq .chezmoi.os "darwin" -}}
+# Install Homebrew if not present
+if ! command -v brew &>/dev/null; then
+  echo "Installing Homebrew..."
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+brew install \
+  neovim \
+  tmux \
+  starship \
+  fzf \
+  fd \
+  yazi \
+  sesh \
+  direnv \
+  zsh-syntax-highlighting \
+  zsh-autosuggestions \
+  nvm \
+  glow
+
+brew install --cask ghostty
+
+{{ else -}}
+# Linux package installation
+if command -v apt-get &>/dev/null; then
+  sudo apt-get update
+  sudo apt-get install -y \
+    tmux \
+    fzf \
+    fd-find \
+    direnv \
+    zsh \
+    zsh-syntax-highlighting \
+    zsh-autosuggestions \
+    curl \
+    git \
+    build-essential \
+    unzip
+
+  # fd-find installs as fdfind on Debian/Ubuntu
+  if ! command -v fd &>/dev/null && command -v fdfind &>/dev/null; then
+    mkdir -p ~/.local/bin
+    ln -sf "$(which fdfind)" ~/.local/bin/fd
+  fi
+
+  # Change default shell to zsh
+  if [ "$SHELL" != "$(which zsh)" ]; then
+    sudo chsh -s "$(which zsh)" "$USER"
+  fi
+
+elif command -v dnf &>/dev/null; then
+  sudo dnf install -y \
+    tmux \
+    fzf \
+    fd-find \
+    direnv \
+    zsh \
+    zsh-syntax-highlighting \
+    zsh-autosuggestions \
+    curl \
+    git
+
+  # Change default shell to zsh
+  if [ "$SHELL" != "$(which zsh)" ]; then
+    sudo chsh -s "$(which zsh)" "$USER"
+  fi
+fi
+
+# Install neovim (AppImage from GitHub releases, for 0.10+)
+if ! command -v nvim &>/dev/null; then
+  mkdir -p ~/.local/bin
+  curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage
+  chmod +x nvim-linux-x86_64.appimage
+  mv nvim-linux-x86_64.appimage ~/.local/bin/nvim
+fi
+
+# Install starship
+if ! command -v starship &>/dev/null; then
+  curl -sS https://starship.rs/install.sh | sh -s -- --yes
+fi
+
+# Install yazi (from GitHub releases)
+if ! command -v yazi &>/dev/null; then
+  YAZI_VERSION=$(curl -s https://api.github.com/repos/sxyazi/yazi/releases/latest | grep '"tag_name"' | cut -d'"' -f4)
+  curl -LO "https://github.com/sxyazi/yazi/releases/download/${YAZI_VERSION}/yazi-x86_64-unknown-linux-gnu.zip"
+  unzip -o yazi-x86_64-unknown-linux-gnu.zip
+  mkdir -p ~/.local/bin
+  mv yazi-x86_64-unknown-linux-gnu/yazi ~/.local/bin/yazi
+  rm -rf yazi-x86_64-unknown-linux-gnu yazi-x86_64-unknown-linux-gnu.zip
+fi
+
+# Install sesh (from GitHub releases)
+if ! command -v sesh &>/dev/null; then
+  SESH_VERSION=$(curl -s https://api.github.com/repos/joshmedeski/sesh/releases/latest | grep '"tag_name"' | cut -d'"' -f4)
+  curl -LO "https://github.com/joshmedeski/sesh/releases/download/${SESH_VERSION}/sesh_Linux_x86_64.tar.gz"
+  tar -xzf sesh_Linux_x86_64.tar.gz sesh
+  mkdir -p ~/.local/bin
+  mv sesh ~/.local/bin/sesh
+  rm -f sesh_Linux_x86_64.tar.gz
+fi
+
+# Install nvm (via git clone)
+if [ ! -d "$HOME/.nvm" ]; then
+  git clone https://github.com/nvm-sh/nvm.git "$HOME/.nvm"
+  cd "$HOME/.nvm" && git checkout "$(git describe --abbrev=0 --tags --match 'v[0-9]*' "$(git rev-list --tags --max-count=1)")"
+fi
+
+# Install glow (from GitHub releases)
+if ! command -v glow &>/dev/null; then
+  GLOW_VERSION=$(curl -s https://api.github.com/repos/charmbracelet/glow/releases/latest | grep '"tag_name"' | cut -d'"' -f4)
+  GLOW_VERSION_NUM="${GLOW_VERSION#v}"
+  curl -LO "https://github.com/charmbracelet/glow/releases/download/${GLOW_VERSION}/glow_${GLOW_VERSION_NUM}_Linux_x86_64.tar.gz"
+  tar -xzf "glow_${GLOW_VERSION_NUM}_Linux_x86_64.tar.gz" "glow_${GLOW_VERSION_NUM}_Linux_x86_64/glow"
+  mkdir -p ~/.local/bin
+  mv "glow_${GLOW_VERSION_NUM}_Linux_x86_64/glow" ~/.local/bin/glow
+  rm -rf "glow_${GLOW_VERSION_NUM}_Linux_x86_64" "glow_${GLOW_VERSION_NUM}_Linux_x86_64.tar.gz"
+fi
+
+{{ end -}}

@@ -1,0 +1,40 @@
+require "nvchad.options"
+
+-- add yours here!
+
+local o = vim.opt
+o.cursorlineopt = "both" -- to enable cursorline!
+o.relativenumber = true
+o.clipboard = "unnamedplus"
+
+local enable_providers = {
+	"node_provider",
+	-- and so on
+}
+
+for _, plugin in pairs(enable_providers) do
+	vim.g["loaded_" .. plugin] = nil
+	vim.cmd("runtime " .. plugin)
+end
+
+{{ if eq .chezmoi.os "darwin" -}}
+vim.g["python3_host_prog"] = "/opt/homebrew/bin/python3"
+{{ else -}}
+vim.g["python3_host_prog"] = "/home/dexter/miniconda3/bin/python3"
+{{ end -}}
+vim.opt.diffopt = "internal,filler,closeoff,algorithm:patience,indent-heuristic"
+
+{{ if eq .chezmoi.os "linux" -}}
+vim.g.clipboard = {
+	name = "tmux",
+	copy = {
+		["+"] = { "tmux", "load-buffer", "-w", "-" },
+		["*"] = { "tmux", "load-buffer", "-w", "-" },
+	},
+	paste = {
+		["+"] = { "tmux", "save-buffer", "-" },
+		["*"] = { "tmux", "save-buffer", "-" },
+	},
+	cache_enabled = 0,
+}
+{{ end -}}

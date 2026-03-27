@@ -1,0 +1,34 @@
+# Font - same as iTerm2
+font-family = Inconsolata Nerd Font Mono
+font-family = Apple SD Gothic Neo
+font-size = 20
+font-thicken = true
+
+# Theme
+theme = Kanagawa Wave
+
+# Scrollback
+scrollback-limit = 10000
+
+# macOS window
+# macos-titlebar-style = tabs
+# window-padding-x = 10
+# window-padding-y = 10
+background-opacity = 0.8
+background-blur = true
+
+# Close without confirmation prompt
+confirm-close-surface = false
+
+# Terminal type (for SSH compatibility)
+term = xterm-256color
+
+# Option key as Alt/Meta (matches iTerm2 "Option Key Sends = Meta")
+macos-option-as-alt = left
+
+# Pass opt+arrow to terminal apps (e.g. nvim <M-Right> for copilot)
+keybind = opt+right=unbind
+keybind = opt+left=unbind
+
+# Shell integration
+shell-integration = zsh

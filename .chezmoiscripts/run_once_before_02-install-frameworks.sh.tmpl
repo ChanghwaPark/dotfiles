@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Set up gpakosz/.tmux
+# chezmoi handles cloning to ~/.tmux via .chezmoiexternal.toml
+# We just need to create ~/.tmux.conf symlink pointing to the repo's .tmux.conf
+if [ -d "$HOME/.tmux" ] && [ ! -f "$HOME/.tmux.conf" ]; then
+  ln -sf "$HOME/.tmux/.tmux.conf" "$HOME/.tmux.conf"
+fi
+
+# Remove NvChad starter .git so it becomes a plain config dir
+# (NvChad plugins are managed by lazy.nvim, not git)
+if [ -d "$HOME/.config/nvim/.git" ]; then
+  echo "Removing NvChad starter .git from ~/.config/nvim ..."
+  rm -rf "$HOME/.config/nvim/.git"
+fi
