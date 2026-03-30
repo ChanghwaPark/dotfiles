@@ -451,6 +451,12 @@ set -g allow-passthrough on
 set -ga update-environment TERM
 set -ga update-environment TERM_PROGRAM
 
+# Claude Code notification bar (always visible, notifications stack in it)
+set -g status 2
+set -g status-format[1] "#[bg=#24283b,align=right]#(bash $HOME/.claude/hooks/notify-render.sh)"
+set-hook -g client-session-changed 'run-shell "bash $HOME/.claude/hooks/notify-clear.sh #{session_name}"'
+
+
 
 # -- tpm -----------------------------------------------------------------------
 
