@@ -5,7 +5,11 @@ set -euo pipefail
 
 if command -v ya &>/dev/null; then
   echo "Installing/updating yazi plugins..."
-  ya pkg install && ya pkg upgrade || true
+  if ya help 2>&1 | grep -q "^  pkg"; then
+    ya pkg install && ya pkg upgrade || true
+  else
+    ya pack -i || true
+  fi
 else
   echo "Warning: 'ya' command not found, skipping yazi plugin install"
 fi
