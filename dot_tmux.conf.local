@@ -436,7 +436,7 @@ bind T display-popup -E -h "70%" -w "80%" "fzf \
     --bind 'ctrl-t:change-prompt(🪟  )+reload(sesh list -t --icons)' \
     --bind 'ctrl-g:change-prompt(⚙️  )+reload(sesh list -c --icons)' \
     --bind 'ctrl-x:change-prompt(📁  )+reload(sesh list -z --icons)' \
-    --bind 'ctrl-f:change-prompt(🔎  )+reload(fd -H -d 2 -t d -E .Trash . ~)' \
+    --bind 'ctrl-f:change-prompt(🔎  )+reload(fd -H -d 3 -t d -E .Trash -E .git -E node_modules -E .venv -E __pycache__ -E .ruff_cache -E .pytest_cache . ~)' \
     --bind 'ctrl-d:execute(tmux kill-session -t {2..})+change-prompt(⚡  )+reload(sesh list --icons)' \
     --bind 'ctrl-n:become(tmux new-session -ds {q} && tmux switch-client -t {q})' \
     --preview-window 'right:55%' \
