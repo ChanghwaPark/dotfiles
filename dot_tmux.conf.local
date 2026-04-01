@@ -425,9 +425,6 @@ bind L switch-client -l #!important
 # display a message after toggling mouse support
 bind m run "cut -c3- '#{TMUX_CONF}' | sh -s _toggle_mouse" \; display 'mouse #{?#{mouse},on,off}'
 
-# Ensure ~/.local/bin is in PATH for display-popup (sesh, etc.)
-run-shell 'tmux set-environment -g PATH "$HOME/.local/bin:$PATH"'
-
 # sesh session picker (popup closes immediately on selection; sesh connect runs in background)
 bind T display-popup -E -h "70%" -w "80%" "fzf \
     --no-sort --ansi --border-label ' sesh ' --prompt '🪟  ' \
