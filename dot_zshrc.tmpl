@@ -59,7 +59,6 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_DEFAULT_OPTS="--ansi"
 
 eval "$(direnv hook zsh)"
-eval "$(zoxide init zsh --cmd cd)"
 {{- if eq .chezmoi.os "darwin" }}
 fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
 {{- end }}
@@ -110,3 +109,6 @@ function y() {
 
 # Load machine-specific settings (not managed by chezmoi)
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
+
+# zoxide must be initialized last so its cd hook is not overwritten by anything above
+eval "$(zoxide init zsh --cmd cd)"

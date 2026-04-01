@@ -16,6 +16,7 @@ brew install \
   fd \
   yazi \
   sesh \
+  zoxide \
   direnv \
   zsh-syntax-highlighting \
   zsh-autosuggestions \
@@ -30,7 +31,6 @@ if command -v apt-get &>/dev/null; then
   sudo apt-get update
   sudo apt-get install -y \
     tmux \
-    fzf \
     fd-find \
     direnv \
     zsh \
@@ -55,7 +55,6 @@ if command -v apt-get &>/dev/null; then
 elif command -v dnf &>/dev/null; then
   sudo dnf install -y \
     tmux \
-    fzf \
     fd-find \
     direnv \
     zsh \
@@ -68,6 +67,16 @@ elif command -v dnf &>/dev/null; then
   if [ "$SHELL" != "$(which zsh)" ]; then
     sudo chsh -s "$(which zsh)" "$USER"
   fi
+fi
+
+# Install fzf from GitHub releases (apt version on Ubuntu 20.04 is 0.20.0, too old for start:reload)
+if [[ ! -x "$HOME/.local/bin/fzf" ]]; then
+  FZF_VERSION=$(curl -s https://api.github.com/repos/junegunn/fzf/releases/latest | grep '"tag_name"' | cut -d'"' -f4 | tr -d 'v')
+  curl -LO "https://github.com/junegunn/fzf/releases/download/v${FZF_VERSION}/fzf-${FZF_VERSION}-linux_amd64.tar.gz"
+  tar -xzf "fzf-${FZF_VERSION}-linux_amd64.tar.gz"
+  mkdir -p ~/.local/bin
+  mv fzf ~/.local/bin/fzf
+  rm -f "fzf-${FZF_VERSION}-linux_amd64.tar.gz"
 fi
 
 # Install neovim (AppImage from GitHub releases, for 0.10+)
@@ -86,6 +95,11 @@ fi
 # Install yazi (via cargo yazi-build)
 if ! command -v yazi &>/dev/null; then
   cargo install --force yazi-build
+fi
+
+# Install zoxide
+if ! command -v zoxide &>/dev/null; then
+  curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
 fi
 
 # Install sesh (from GitHub releases)
