@@ -3,11 +3,11 @@ README.md
 
 # Karabiner is macOS-only
 {{ if ne .chezmoi.os "darwin" }}
-private_dot_config/karabiner
+.config/karabiner
 {{ end }}
 
 # Ghostty is not available on Linux servers
 {{ if and (eq .chezmoi.os "linux") (not .isDesktop) }}
-private_dot_config/ghostty
+.config/ghostty
 {{ end }}
 .config/yazi/plugins/
