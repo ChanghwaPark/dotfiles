@@ -1,3 +1,5 @@
+local is_nvim_012 = vim.fn.has("nvim-0.12") == 1
+
 return {
 	{
 		"stevearc/conform.nvim",
@@ -42,11 +44,10 @@ return {
 	},
 
 	{
-		-- nvim-treesitter main branch targets Neovim 0.12.0+
-		-- build runs once at install/update time (not on every startup)
+		-- main branch targets Neovim 0.12.0+; master is frozen for <=0.11
 		"nvim-treesitter/nvim-treesitter",
-		branch = "main",
-		build = function()
+		branch = is_nvim_012 and "main" or "master",
+		build = is_nvim_012 and function()
 			require("nvim-treesitter").install({
 				"vim",
 				"lua",
@@ -60,7 +61,23 @@ return {
 				"python",
 				"rust",
 			}):wait(300000)
-		end,
+		end or ":TSUpdate",
+		opts = (not is_nvim_012) and {
+			ensure_installed = {
+				"vim",
+				"lua",
+				"vimdoc",
+				"html",
+				"css",
+				"javascript",
+				"c",
+				"markdown",
+				"markdown_inline",
+				"python",
+				"rust",
+			},
+			indent = { enable = true },
+		} or nil,
 	},
 
 	{
