@@ -43,7 +43,8 @@ if command -v apt-get &>/dev/null; then
     curl \
     git \
     build-essential \
-    unzip
+    unzip \
+    libclang-dev
 
   # fd-find installs as fdfind on Debian/Ubuntu
   if ! command -v fd &>/dev/null && command -v fdfind &>/dev/null; then
