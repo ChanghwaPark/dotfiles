@@ -42,9 +42,12 @@ return {
 	},
 
 	{
+		-- nvim-treesitter main branch targets Neovim 0.12.0+
+		-- build runs once at install/update time (not on every startup)
 		"nvim-treesitter/nvim-treesitter",
-		opts = {
-			ensure_installed = {
+		branch = "main",
+		build = function()
+			require("nvim-treesitter").install({
 				"vim",
 				"lua",
 				"vimdoc",
@@ -56,14 +59,8 @@ return {
 				"markdown_inline",
 				"python",
 				"rust",
-			},
-			indent = {
-				enable = true,
-				-- disable = {
-				--   "python"
-				-- },
-			},
-		},
+			}):wait(300000)
+		end,
 	},
 
 	{

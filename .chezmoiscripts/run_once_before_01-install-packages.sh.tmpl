@@ -25,6 +25,11 @@ brew install \
 
 brew install --cask ghostty
 
+# Install tree-sitter CLI via cargo (brew only ships the library, not the CLI)
+if ! command -v tree-sitter &>/dev/null; then
+  cargo install tree-sitter-cli
+fi
+
 {{ else -}}
 # Linux package installation
 if command -v apt-get &>/dev/null; then
@@ -117,6 +122,11 @@ fi
 # Install yazi (via cargo yazi-build)
 if ! command -v yazi &>/dev/null; then
   cargo install --force yazi-build
+fi
+
+# Install tree-sitter CLI (required by nvim-treesitter main branch for parser compilation)
+if ! command -v tree-sitter &>/dev/null; then
+  cargo install tree-sitter-cli
 fi
 
 # Install zoxide

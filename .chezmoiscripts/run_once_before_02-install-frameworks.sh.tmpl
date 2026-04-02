@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Ensure cargo bin is in PATH (tree-sitter CLI needed for nvim-treesitter parser compilation)
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+
 # Set up gpakosz/.tmux
 # chezmoi handles cloning to ~/.tmux via .chezmoiexternal.toml
 # We just need to create ~/.tmux.conf symlink pointing to the repo's .tmux.conf
