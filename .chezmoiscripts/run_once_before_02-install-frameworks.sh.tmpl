@@ -19,5 +19,5 @@ fi
 # This prevents "cannot open base46/defaults" error on first interactive nvim launch
 if command -v nvim &>/dev/null && [ ! -d "$HOME/.local/share/nvim/nvchad/base46" ]; then
   echo "Bootstrapping NvChad (first-time setup, this may take a while)..."
-  nvim --headless "+Lazy! sync" +qa 2>&1 || true
+  nvim --headless -c "lua require('lazy').sync({wait=true, show=false})" +qa 2>&1 || true
 fi

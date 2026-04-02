@@ -28,9 +28,11 @@ require("lazy").setup({
   { import = "plugins" },
 }, lazy_config)
 
--- load theme
-dofile(vim.g.base46_cache .. "defaults")
-dofile(vim.g.base46_cache .. "statusline")
+-- load theme (cache compiled by NvChad after first Lazy sync)
+if vim.loop.fs_stat(vim.g.base46_cache .. "defaults") then
+  dofile(vim.g.base46_cache .. "defaults")
+  dofile(vim.g.base46_cache .. "statusline")
+end
 
 require "nvchad.autocmds"
 
