@@ -20,7 +20,7 @@ end
 {{ if eq .chezmoi.os "darwin" -}}
 vim.g["python3_host_prog"] = "/opt/homebrew/bin/python3"
 {{ else -}}
-vim.g["python3_host_prog"] = "/home/dexter/miniconda3/bin/python3"
+vim.g["python3_host_prog"] = vim.fn.exepath("python3")
 {{ end -}}
 vim.opt.diffopt = "internal,filler,closeoff,algorithm:patience,indent-heuristic"
 

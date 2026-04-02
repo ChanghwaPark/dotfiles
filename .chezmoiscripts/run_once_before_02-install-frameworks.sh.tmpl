@@ -15,9 +15,17 @@ if [ -d "$HOME/.config/nvim/.git" ]; then
   rm -rf "$HOME/.config/nvim/.git"
 fi
 
-# Bootstrap NvChad: run headless nvim to install plugins and generate base46 cache
-# This prevents "cannot open base46/defaults" error on first interactive nvim launch
+# Step 1: Install lazy.nvim plugins (fresh server only - skipped if already installed)
+# Uses LazyDone autocmd to quit after sync completes, instead of +qa which exits immediately
+if command -v nvim &>/dev/null && [ ! -d "$HOME/.local/share/nvim/lazy" ]; then
+  echo "Installing NvChad plugins (first-time setup, this may take a while)..."
+  nvim --headless "+Lazy! sync" -c "autocmd User LazyDone ++once qa" 2>&1 || true
+fi
+
+# Step 2: Generate NvChad base46 theme cache (skipped if already present)
+# NvChad v2.5 expects cache at ~/.local/share/nvim/nvchad/base46/
+# Requires plugins to be installed first (step 1 above)
 if command -v nvim &>/dev/null && [ ! -d "$HOME/.local/share/nvim/nvchad/base46" ]; then
-  echo "Bootstrapping NvChad (first-time setup, this may take a while)..."
-  nvim --headless -c "lua require('lazy').sync({wait=true, show=false})" +qa 2>&1 || true
+  echo "Generating NvChad base46 cache..."
+  nvim --headless -c "lua require('base46').load_all_highlights()" +qa 2>&1 || true
 fi

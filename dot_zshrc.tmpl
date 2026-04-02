@@ -4,7 +4,7 @@ export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$HOME/.local/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 {{ end -}}
 
-eval "$(starship init zsh)"
+command -v starship &>/dev/null && eval "$(starship init zsh)"
 
 autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
@@ -58,7 +58,7 @@ export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git --co
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_DEFAULT_OPTS="--ansi"
 
-eval "$(direnv hook zsh)"
+command -v direnv &>/dev/null && eval "$(direnv hook zsh)"
 {{- if eq .chezmoi.os "darwin" }}
 fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
 {{- end }}
@@ -111,4 +111,4 @@ function y() {
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
 # zoxide must be initialized last so its cd hook is not overwritten by anything above
-eval "$(zoxide init zsh --cmd cd)"
+command -v zoxide &>/dev/null && eval "$(zoxide init zsh --cmd cd)"

@@ -67,27 +67,51 @@ elif command -v dnf &>/dev/null; then
   fi
 fi
 
+# Install tmux only if not already present (preserves custom builds)
+if ! command -v tmux &>/dev/null; then
+  if command -v apt-get &>/dev/null; then
+    sudo apt-get install -y tmux
+  elif command -v dnf &>/dev/null; then
+    sudo dnf install -y tmux
+  fi
+fi
+
+# Detect architecture for binary downloads
+ARCH=$(uname -m)
+case "$ARCH" in
+  x86_64)          LINUX_ARCH_AMD="linux_amd64" ; LINUX_ARCH_X="x86_64"   ;;
+  aarch64|arm64)   LINUX_ARCH_AMD="linux_arm64" ; LINUX_ARCH_X="arm64"    ;;
+  *) echo "Warning: unknown arch $ARCH, defaulting to x86_64"
+     LINUX_ARCH_AMD="linux_amd64" ; LINUX_ARCH_X="x86_64" ;;
+esac
+
 # Install fzf from GitHub releases (apt version on Ubuntu 20.04 is 0.20.0, too old for start:reload)
 if [[ ! -x "$HOME/.local/bin/fzf" ]]; then
   FZF_VERSION=$(curl -s https://api.github.com/repos/junegunn/fzf/releases/latest | grep '"tag_name"' | cut -d'"' -f4 | tr -d 'v')
-  curl -LO "https://github.com/junegunn/fzf/releases/download/v${FZF_VERSION}/fzf-${FZF_VERSION}-linux_amd64.tar.gz"
-  tar -xzf "fzf-${FZF_VERSION}-linux_amd64.tar.gz"
+  curl -LO "https://github.com/junegunn/fzf/releases/download/v${FZF_VERSION}/fzf-${FZF_VERSION}-${LINUX_ARCH_AMD}.tar.gz"
+  tar -xzf "fzf-${FZF_VERSION}-${LINUX_ARCH_AMD}.tar.gz"
   mkdir -p ~/.local/bin
   mv fzf ~/.local/bin/fzf
-  rm -f "fzf-${FZF_VERSION}-linux_amd64.tar.gz"
+  rm -f "fzf-${FZF_VERSION}-${LINUX_ARCH_AMD}.tar.gz"
 fi
 
 # Install neovim (AppImage from GitHub releases, for 0.10+)
 if ! command -v nvim &>/dev/null; then
   mkdir -p ~/.local/bin
-  curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage
-  chmod +x nvim-linux-x86_64.appimage
-  mv nvim-linux-x86_64.appimage ~/.local/bin/nvim
+  curl -LO "https://github.com/neovim/neovim/releases/latest/download/nvim-linux-${LINUX_ARCH_X}.appimage"
+  chmod +x "nvim-linux-${LINUX_ARCH_X}.appimage"
+  mv "nvim-linux-${LINUX_ARCH_X}.appimage" ~/.local/bin/nvim
 fi
 
 # Install starship
 if ! command -v starship &>/dev/null; then
   curl -sS https://starship.rs/install.sh | sh -s -- --yes
+fi
+
+# Install Rust if not present (required for yazi)
+if ! command -v cargo &>/dev/null; then
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+  . "$HOME/.cargo/env"
 fi
 
 # Install yazi (via cargo yazi-build)
@@ -103,11 +127,12 @@ fi
 # Install sesh (from GitHub releases)
 if ! command -v sesh &>/dev/null; then
   SESH_VERSION=$(curl -s https://api.github.com/repos/joshmedeski/sesh/releases/latest | grep '"tag_name"' | cut -d'"' -f4)
-  curl -LO "https://github.com/joshmedeski/sesh/releases/download/${SESH_VERSION}/sesh_Linux_x86_64.tar.gz"
-  tar -xzf sesh_Linux_x86_64.tar.gz sesh
+  SESH_ARCH_X=$(echo "$LINUX_ARCH_X" | sed 's/arm64/aarch64/')
+  curl -LO "https://github.com/joshmedeski/sesh/releases/download/${SESH_VERSION}/sesh_Linux_${SESH_ARCH_X}.tar.gz"
+  tar -xzf "sesh_Linux_${SESH_ARCH_X}.tar.gz" sesh
   mkdir -p ~/.local/bin
   mv sesh ~/.local/bin/sesh
-  rm -f sesh_Linux_x86_64.tar.gz
+  rm -f "sesh_Linux_${SESH_ARCH_X}.tar.gz"
 fi
 
 # Install nvm (via git clone)
@@ -120,11 +145,12 @@ fi
 if ! command -v glow &>/dev/null; then
   GLOW_VERSION=$(curl -s https://api.github.com/repos/charmbracelet/glow/releases/latest | grep '"tag_name"' | cut -d'"' -f4)
   GLOW_VERSION_NUM="${GLOW_VERSION#v}"
-  curl -LO "https://github.com/charmbracelet/glow/releases/download/${GLOW_VERSION}/glow_${GLOW_VERSION_NUM}_Linux_x86_64.tar.gz"
-  tar -xzf "glow_${GLOW_VERSION_NUM}_Linux_x86_64.tar.gz" "glow_${GLOW_VERSION_NUM}_Linux_x86_64/glow"
+  GLOW_ARCHIVE="glow_${GLOW_VERSION_NUM}_Linux_${LINUX_ARCH_X}"
+  curl -LO "https://github.com/charmbracelet/glow/releases/download/${GLOW_VERSION}/${GLOW_ARCHIVE}.tar.gz"
+  tar -xzf "${GLOW_ARCHIVE}.tar.gz" "${GLOW_ARCHIVE}/glow"
   mkdir -p ~/.local/bin
-  mv "glow_${GLOW_VERSION_NUM}_Linux_x86_64/glow" ~/.local/bin/glow
-  rm -rf "glow_${GLOW_VERSION_NUM}_Linux_x86_64" "glow_${GLOW_VERSION_NUM}_Linux_x86_64.tar.gz"
+  mv "${GLOW_ARCHIVE}/glow" ~/.local/bin/glow
+  rm -rf "${GLOW_ARCHIVE}" "${GLOW_ARCHIVE}.tar.gz"
 fi
 
 {{ end -}}
