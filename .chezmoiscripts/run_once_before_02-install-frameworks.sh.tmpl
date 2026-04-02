@@ -14,3 +14,10 @@ if [ -d "$HOME/.config/nvim/.git" ]; then
   echo "Removing NvChad starter .git from ~/.config/nvim ..."
   rm -rf "$HOME/.config/nvim/.git"
 fi
+
+# Bootstrap NvChad: run headless nvim to install plugins and generate base46 cache
+# This prevents "cannot open base46/defaults" error on first interactive nvim launch
+if command -v nvim &>/dev/null && [ ! -d "$HOME/.local/share/nvim/nvchad/base46" ]; then
+  echo "Bootstrapping NvChad (first-time setup, this may take a while)..."
+  nvim --headless "+Lazy! sync" +qa 2>&1 || true
+fi
