@@ -32,3 +32,6 @@ keybind = opt+left=unbind
 
 # Shell integration
 shell-integration = zsh
+
+# Local machine overrides (not managed by chezmoi) — loaded last so it wins
+config-file = ?config.local
